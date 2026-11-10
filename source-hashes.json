@@ -1,0 +1,5 @@
+{
+  "sources/sync-baseline.yml": "c7b6f82887e897f501966d84b73435406f4e6280fde9bb7d3ef77130abadfac8",
+  "sources/verify-group-version.yml": "509f7b68490eb5da9ed2734933d04e97767d4298e2e5c9e4091ffa2a89b7cce0",
+  "sources/action-sync-main.go": "312d3bac2bd385f6541cdc492ce985bd619b776b4d24602962bae8a9be4df747"
+}

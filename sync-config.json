@@ -1,0 +1,10 @@
+[
+  {
+    "src": "workflow-templates/review-sync-marker.yml",
+    "dest": "peeweep-test/dde-release-review-20261110-072232/.github/workflows/review-sync-marker.yml",
+    "branches": [
+      "review/template-unprotected$",
+      "review/template-protected$"
+    ]
+  }
+]

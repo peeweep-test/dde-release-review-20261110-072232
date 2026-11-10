@@ -1,0 +1,17 @@
+name: Template protection review
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REVIEW_SYNC_SSH_KEY: ${{ secrets.REVIEW_SYNC_SSH_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+        with: {persist-credentials: false}
+      - run: pip install --quiet pyyaml
+      - name: Exercise original SSH template sync
+        run: python3 review_runner.py template

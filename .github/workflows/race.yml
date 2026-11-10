@@ -1,0 +1,35 @@
+name: Baseline race review
+run-name: race-${{ inputs.probe_id }}-${{ inputs.role }}
+on:
+  workflow_dispatch:
+    inputs:
+      role: {type: choice, required: true, options: [older, newer]}
+      scenario: {type: choice, required: true, options: [pending, failure]}
+      group: {type: string, required: false}
+      probe_id: {type: string, required: true}
+      baseline_pr: {type: string, required: true}
+      change_pr: {type: string, required: true}
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: write
+jobs:
+  coordinate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: baseline-controller-${{ inputs.group || github.event.pull_request.number || 'sync' }}
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ROLE: ${{ inputs.role }}
+      SCENARIO: ${{ inputs.scenario }}
+      PROBE_ID: ${{ inputs.probe_id }}
+      BASELINE_PR: ${{ inputs.baseline_pr }}
+      CHANGE_PR: ${{ inputs.change_pr }}
+    steps:
+      - uses: actions/checkout@v5
+        with: {persist-credentials: false}
+      - run: pip install --quiet pyyaml
+      - name: Exercise original controller against real PRs
+        run: python3 review_runner.py race

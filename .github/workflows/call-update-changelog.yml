@@ -1,0 +1,15 @@
+name: Inert member release entry
+on:
+  workflow_dispatch:
+    inputs:
+      version: {type: string}
+      name: {type: string}
+      email: {type: string}
+      base_branch: {type: string}
+      distribution: {type: string}
+      create_pr: {type: boolean}
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Fixture only; test member PRs are created explicitly.'

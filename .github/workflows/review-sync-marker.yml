@@ -1,0 +1,8 @@
+# template revision 1
+name: Inert sync marker
+on: workflow_dispatch
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo template-marker
